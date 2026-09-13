@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Raw data (download separately; keep placeholders)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.pbix
+_olist_tmp/
+.ipynb_checkpoints/
+
+# temporarily excluded until workflow scope granted
+# .github/workflows/deploy.yml
+
+docs/_pending/

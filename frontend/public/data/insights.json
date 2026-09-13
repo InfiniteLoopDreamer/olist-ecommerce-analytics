@@ -1,0 +1,1135 @@
+{
+  "meta": {
+    "project": "Olist 巴西电商经营分析",
+    "source": "Brazilian E-Commerce Public Dataset by Olist (Kaggle)",
+    "license": "CC BY-NC-SA 4.0",
+    "generated_note": "指标基于已送达订单；客户标识使用 customer_unique_id。"
+  },
+  "kpis": {
+    "orders": 96478,
+    "customers": 93358,
+    "gmv": 13221498.11,
+    "aov": 137.04,
+    "repeat_rate": 0.03,
+    "avg_review": 4.16,
+    "on_time_rate": 0.9189,
+    "late_rate": 0.0811,
+    "avg_delivery_days": 12.6,
+    "date_start": "2016-09-15",
+    "date_end": "2018-08-29",
+    "total_orders_all_status": 99441,
+    "sellers": 3095,
+    "products": 32951,
+    "avg_m1_retention": 0.0045
+  },
+  "findings": [
+    {
+      "title": "复购率",
+      "metric": "3.0%",
+      "detail": "在 93,358 名真实用户（customer_unique_id）中，有过 ≥2 笔已送达订单的用户约占 3.0%。"
+    },
+    {
+      "title": "同期群次月留存",
+      "metric": "0.45%",
+      "detail": "样本量 ≥500 的月度队列，平均次月留存约为 0.45%（当月留存按定义均为 100%）。"
+    },
+    {
+      "title": "超时与一星评价",
+      "metric": "46.1% / 6.6%",
+      "detail": "超时订单一星占比约 46.1%；按时/提前送达订单一星占比约 6.6%。"
+    },
+    {
+      "title": "州级成交集中度",
+      "metric": "SP 38.3%",
+      "detail": "成交额最高的州为 SP，约占全部已送达成交额的 38.3%。"
+    },
+    {
+      "title": "品类与卖家集中度",
+      "metric": "Top5 39.8%",
+      "detail": "成交额前 5 品类合计约占 39.8%；按成交额累计，约 533 名卖家贡献 80% 成交额（卖家总数 2,970）。"
+    }
+  ],
+  "recommendations": [],
+  "methodology": [
+    {
+      "q": "成交额如何统计？",
+      "a": "仅统计 order_status = delivered 的订单商品金额合计（不含运费）。"
+    },
+    {
+      "q": "用户如何识别？",
+      "a": "聚合键使用 customer_unique_id；customer_id 随订单重置，不代表同一自然人。"
+    },
+    {
+      "q": "超时如何定义？",
+      "a": "实际签收时间晚于承诺送达时间记为超时。"
+    }
+  ],
+  "data_quality": {
+    "tables": [
+      {
+        "name": "客户表",
+        "rows": 99441
+      },
+      {
+        "name": "订单表",
+        "rows": 99441
+      },
+      {
+        "name": "订单明细",
+        "rows": 112650
+      },
+      {
+        "name": "支付表",
+        "rows": 103886
+      },
+      {
+        "name": "评价表",
+        "rows": 99224
+      },
+      {
+        "name": "商品表",
+        "rows": 32951
+      },
+      {
+        "name": "卖家表",
+        "rows": 3095
+      }
+    ],
+    "delivered_share": 0.9702,
+    "id_trap": {
+      "customer_id_count": 99441,
+      "customer_unique_id_count": 96096,
+      "note": "Olist 为每笔订单生成新的 customer_id；同一自然人对应 customer_unique_id。客户级指标均按 customer_unique_id 聚合。"
+    },
+    "rules": [
+      "成交额 / 客单价 / RFM 仅统计 order_status = delivered",
+      "客户聚合使用 customer_unique_id",
+      "超时定义：实际签收时间晚于承诺送达时间",
+      "RFM 的 F 按订单次数分箱（数据中频次高度集中在 1）"
+    ]
+  },
+  "cohort_retention": {
+    "cohorts": [
+      "2017-01",
+      "2017-02",
+      "2017-03",
+      "2017-04",
+      "2017-05",
+      "2017-06",
+      "2017-07",
+      "2017-08",
+      "2017-09",
+      "2017-10",
+      "2017-11",
+      "2017-12",
+      "2018-01",
+      "2018-02",
+      "2018-03",
+      "2018-04",
+      "2018-05",
+      "2018-06",
+      "2018-07",
+      "2018-08"
+    ],
+    "periods": [
+      "当月",
+      "第1月",
+      "第2月",
+      "第3月",
+      "第4月",
+      "第5月"
+    ],
+    "matrix": [
+      [
+        1.0,
+        0.0028,
+        0.0028,
+        0.0014,
+        0.0042,
+        0.0014
+      ],
+      [
+        1.0,
+        0.0018,
+        0.0031,
+        0.0012,
+        0.0043,
+        0.0012
+      ],
+      [
+        1.0,
+        0.0044,
+        0.0036,
+        0.004,
+        0.0036,
+        0.0016
+      ],
+      [
+        1.0,
+        0.0062,
+        0.0022,
+        0.0018,
+        0.0027,
+        0.0027
+      ],
+      [
+        1.0,
+        0.0046,
+        0.0046,
+        0.0029,
+        0.0029,
+        0.0032
+      ],
+      [
+        1.0,
+        0.0049,
+        0.004,
+        0.0043,
+        0.003,
+        0.004
+      ],
+      [
+        1.0,
+        0.0053,
+        0.0035,
+        0.0024,
+        0.0029,
+        0.0021
+      ],
+      [
+        1.0,
+        0.0069,
+        0.0035,
+        0.0027,
+        0.0035,
+        0.0052
+      ],
+      [
+        1.0,
+        0.007,
+        0.0055,
+        0.0027,
+        0.0045,
+        0.0022
+      ],
+      [
+        1.0,
+        0.0072,
+        0.0025,
+        0.0009,
+        0.0023,
+        0.0021
+      ],
+      [
+        1.0,
+        0.0057,
+        0.0037,
+        0.0017,
+        0.0017,
+        0.0018
+      ],
+      [
+        1.0,
+        0.0021,
+        0.0028,
+        0.0034,
+        0.0026,
+        0.0021
+      ],
+      [
+        1.0,
+        0.0034,
+        0.0037,
+        0.0029,
+        0.0029,
+        0.0016
+      ],
+      [
+        1.0,
+        0.0035,
+        0.004,
+        0.003,
+        0.0025,
+        0.0022
+      ],
+      [
+        1.0,
+        0.004,
+        0.003,
+        0.003,
+        0.0012,
+        0.0012
+      ],
+      [
+        1.0,
+        0.0059,
+        0.003,
+        0.0024,
+        0.0014,
+        0.0
+      ],
+      [
+        1.0,
+        0.0052,
+        0.0026,
+        0.0018,
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        0.0043,
+        0.0027,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        0.0052,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "sizes": [
+      717,
+      1628,
+      2503,
+      2256,
+      3451,
+      3037,
+      3752,
+      4057,
+      4004,
+      4328,
+      7060,
+      5338,
+      6842,
+      6288,
+      6774,
+      6582,
+      6506,
+      5878,
+      5949,
+      6144
+    ],
+    "avg_m1_retention": 0.0045
+  },
+  "monthly": [
+    {
+      "purchase_month": "2016-09",
+      "orders": 1,
+      "gmv": 134.97,
+      "customers": 1,
+      "aov": 134.97,
+      "avg_review": 1.0,
+      "late_rate": 1.0
+    },
+    {
+      "purchase_month": "2016-10",
+      "orders": 265,
+      "gmv": 40325.11,
+      "customers": 262,
+      "aov": 152.17,
+      "avg_review": 4.01,
+      "late_rate": 0.0113
+    },
+    {
+      "purchase_month": "2016-12",
+      "orders": 1,
+      "gmv": 10.9,
+      "customers": 1,
+      "aov": 10.9,
+      "avg_review": 5.0,
+      "late_rate": 0.0
+    },
+    {
+      "purchase_month": "2017-01",
+      "orders": 750,
+      "gmv": 111798.36,
+      "customers": 718,
+      "aov": 149.06,
+      "avg_review": 4.2,
+      "late_rate": 0.0307
+    },
+    {
+      "purchase_month": "2017-02",
+      "orders": 1653,
+      "gmv": 234223.4,
+      "customers": 1630,
+      "aov": 141.7,
+      "avg_review": 4.2,
+      "late_rate": 0.0321
+    },
+    {
+      "purchase_month": "2017-03",
+      "orders": 2546,
+      "gmv": 359198.85,
+      "customers": 2508,
+      "aov": 141.08,
+      "avg_review": 4.19,
+      "late_rate": 0.0558
+    },
+    {
+      "purchase_month": "2017-04",
+      "orders": 2303,
+      "gmv": 340669.68,
+      "customers": 2274,
+      "aov": 147.92,
+      "avg_review": 4.14,
+      "late_rate": 0.0786
+    },
+    {
+      "purchase_month": "2017-05",
+      "orders": 3546,
+      "gmv": 489338.25,
+      "customers": 3479,
+      "aov": 138.0,
+      "avg_review": 4.24,
+      "late_rate": 0.0361
+    },
+    {
+      "purchase_month": "2017-06",
+      "orders": 3135,
+      "gmv": 421923.37,
+      "customers": 3076,
+      "aov": 134.58,
+      "avg_review": 4.22,
+      "late_rate": 0.0386
+    },
+    {
+      "purchase_month": "2017-07",
+      "orders": 3872,
+      "gmv": 481604.52,
+      "customers": 3802,
+      "aov": 124.38,
+      "avg_review": 4.26,
+      "late_rate": 0.0343
+    },
+    {
+      "purchase_month": "2017-08",
+      "orders": 4193,
+      "gmv": 554699.7,
+      "customers": 4114,
+      "aov": 132.29,
+      "avg_review": 4.31,
+      "late_rate": 0.0332
+    },
+    {
+      "purchase_month": "2017-09",
+      "orders": 4150,
+      "gmv": 607399.67,
+      "customers": 4083,
+      "aov": 146.36,
+      "avg_review": 4.27,
+      "late_rate": 0.052
+    },
+    {
+      "purchase_month": "2017-10",
+      "orders": 4478,
+      "gmv": 648247.65,
+      "customers": 4417,
+      "aov": 144.76,
+      "avg_review": 4.21,
+      "late_rate": 0.0529
+    },
+    {
+      "purchase_month": "2017-11",
+      "orders": 7289,
+      "gmv": 987765.37,
+      "customers": 7183,
+      "aov": 135.51,
+      "avg_review": 3.99,
+      "late_rate": 0.1431
+    },
+    {
+      "purchase_month": "2017-12",
+      "orders": 5513,
+      "gmv": 726033.19,
+      "customers": 5450,
+      "aov": 131.69,
+      "avg_review": 4.09,
+      "late_rate": 0.0838
+    },
+    {
+      "purchase_month": "2018-01",
+      "orders": 7069,
+      "gmv": 924645.0,
+      "customers": 6974,
+      "aov": 130.8,
+      "avg_review": 4.11,
+      "late_rate": 0.0656
+    },
+    {
+      "purchase_month": "2018-02",
+      "orders": 6555,
+      "gmv": 826437.13,
+      "customers": 6400,
+      "aov": 126.08,
+      "avg_review": 3.88,
+      "late_rate": 0.1599
+    },
+    {
+      "purchase_month": "2018-03",
+      "orders": 7003,
+      "gmv": 953356.25,
+      "customers": 6914,
+      "aov": 136.14,
+      "avg_review": 3.81,
+      "late_rate": 0.2136
+    },
+    {
+      "purchase_month": "2018-04",
+      "orders": 6798,
+      "gmv": 973534.09,
+      "customers": 6744,
+      "aov": 143.21,
+      "avg_review": 4.21,
+      "late_rate": 0.0531
+    },
+    {
+      "purchase_month": "2018-05",
+      "orders": 6749,
+      "gmv": 977544.69,
+      "customers": 6693,
+      "aov": 144.84,
+      "avg_review": 4.24,
+      "late_rate": 0.0824
+    },
+    {
+      "purchase_month": "2018-06",
+      "orders": 6099,
+      "gmv": 856077.86,
+      "customers": 6061,
+      "aov": 140.36,
+      "avg_review": 4.31,
+      "late_rate": 0.0136
+    },
+    {
+      "purchase_month": "2018-07",
+      "orders": 6159,
+      "gmv": 867953.46,
+      "customers": 6100,
+      "aov": 140.92,
+      "avg_review": 4.32,
+      "late_rate": 0.0448
+    },
+    {
+      "purchase_month": "2018-08",
+      "orders": 6351,
+      "gmv": 838576.64,
+      "customers": 6310,
+      "aov": 132.04,
+      "avg_review": 4.31,
+      "late_rate": 0.1039
+    }
+  ],
+  "by_state": [
+    {
+      "customer_state": "SP",
+      "orders": 40501,
+      "gmv": 5067633.16,
+      "avg_review": 4.25,
+      "gmv_share": 0.3833
+    },
+    {
+      "customer_state": "RJ",
+      "orders": 12350,
+      "gmv": 1759651.13,
+      "avg_review": 3.97,
+      "gmv_share": 0.1331
+    },
+    {
+      "customer_state": "MG",
+      "orders": 11354,
+      "gmv": 1552481.83,
+      "avg_review": 4.19,
+      "gmv_share": 0.1174
+    },
+    {
+      "customer_state": "RS",
+      "orders": 5345,
+      "gmv": 728897.47,
+      "avg_review": 4.19,
+      "gmv_share": 0.0551
+    },
+    {
+      "customer_state": "PR",
+      "orders": 4923,
+      "gmv": 666063.51,
+      "avg_review": 4.24,
+      "gmv_share": 0.0504
+    },
+    {
+      "customer_state": "SC",
+      "orders": 3546,
+      "gmv": 507012.13,
+      "avg_review": 4.13,
+      "gmv_share": 0.0383
+    },
+    {
+      "customer_state": "BA",
+      "orders": 3256,
+      "gmv": 493584.14,
+      "avg_review": 3.93,
+      "gmv_share": 0.0373
+    },
+    {
+      "customer_state": "DF",
+      "orders": 2080,
+      "gmv": 296498.41,
+      "avg_review": 4.13,
+      "gmv_share": 0.0224
+    },
+    {
+      "customer_state": "GO",
+      "orders": 1957,
+      "gmv": 282836.7,
+      "avg_review": 4.1,
+      "gmv_share": 0.0214
+    },
+    {
+      "customer_state": "ES",
+      "orders": 1995,
+      "gmv": 268643.45,
+      "avg_review": 4.08,
+      "gmv_share": 0.0203
+    },
+    {
+      "customer_state": "PE",
+      "orders": 1593,
+      "gmv": 251889.49,
+      "avg_review": 4.08,
+      "gmv_share": 0.0191
+    },
+    {
+      "customer_state": "CE",
+      "orders": 1279,
+      "gmv": 219757.38,
+      "avg_review": 3.94,
+      "gmv_share": 0.0166
+    },
+    {
+      "customer_state": "PA",
+      "orders": 946,
+      "gmv": 174470.59,
+      "avg_review": 3.91,
+      "gmv_share": 0.0132
+    },
+    {
+      "customer_state": "MT",
+      "orders": 886,
+      "gmv": 152191.62,
+      "avg_review": 4.15,
+      "gmv_share": 0.0115
+    },
+    {
+      "customer_state": "MA",
+      "orders": 717,
+      "gmv": 117009.38,
+      "avg_review": 3.83,
+      "gmv_share": 0.0088
+    }
+  ],
+  "by_category": [
+    {
+      "category": "health_beauty",
+      "orders": 8647,
+      "gmv": 1233131.72,
+      "items": 9465,
+      "gmv_share": 0.0933
+    },
+    {
+      "category": "watches_gifts",
+      "orders": 5495,
+      "gmv": 1166176.98,
+      "items": 5859,
+      "gmv_share": 0.0882
+    },
+    {
+      "category": "bed_bath_table",
+      "orders": 9272,
+      "gmv": 1023434.76,
+      "items": 10953,
+      "gmv_share": 0.0774
+    },
+    {
+      "category": "sports_leisure",
+      "orders": 7530,
+      "gmv": 954852.55,
+      "items": 8431,
+      "gmv_share": 0.0722
+    },
+    {
+      "category": "computers_accessories",
+      "orders": 6530,
+      "gmv": 888724.61,
+      "items": 7644,
+      "gmv_share": 0.0672
+    },
+    {
+      "category": "furniture_decor",
+      "orders": 6307,
+      "gmv": 711927.69,
+      "items": 8160,
+      "gmv_share": 0.0538
+    },
+    {
+      "category": "housewares",
+      "orders": 5743,
+      "gmv": 615628.69,
+      "items": 6795,
+      "gmv_share": 0.0466
+    },
+    {
+      "category": "cool_stuff",
+      "orders": 3559,
+      "gmv": 610204.1,
+      "items": 3718,
+      "gmv_share": 0.0462
+    },
+    {
+      "category": "auto",
+      "orders": 3810,
+      "gmv": 578966.65,
+      "items": 4140,
+      "gmv_share": 0.0438
+    },
+    {
+      "category": "toys",
+      "orders": 3804,
+      "gmv": 471286.48,
+      "items": 4030,
+      "gmv_share": 0.0356
+    },
+    {
+      "category": "garden_tools",
+      "orders": 3448,
+      "gmv": 470495.28,
+      "items": 4268,
+      "gmv_share": 0.0356
+    },
+    {
+      "category": "baby",
+      "orders": 2809,
+      "gmv": 400421.84,
+      "items": 2982,
+      "gmv_share": 0.0303
+    },
+    {
+      "category": "perfumery",
+      "orders": 3086,
+      "gmv": 390144.65,
+      "items": 3340,
+      "gmv_share": 0.0295
+    },
+    {
+      "category": "telephony",
+      "orders": 4093,
+      "gmv": 309860.23,
+      "items": 4430,
+      "gmv_share": 0.0234
+    },
+    {
+      "category": "office_furniture",
+      "orders": 1254,
+      "gmv": 268154.31,
+      "items": 1668,
+      "gmv_share": 0.0203
+    }
+  ],
+  "by_payment": [
+    {
+      "payment_type": "credit_card",
+      "orders": 73941,
+      "gmv": 10539760.33,
+      "aov": 142.54
+    },
+    {
+      "payment_type": "boleto",
+      "orders": 19191,
+      "gmv": 2329807.64,
+      "aov": 121.4
+    },
+    {
+      "payment_type": "debit_card",
+      "orders": 1484,
+      "gmv": 177868.46,
+      "aov": 119.86
+    },
+    {
+      "payment_type": "voucher",
+      "orders": 1861,
+      "gmv": 173926.71,
+      "aov": 93.46
+    }
+  ],
+  "by_installment": [
+    {
+      "installment_group": "1",
+      "orders": 46815,
+      "aov": 99.94
+    },
+    {
+      "installment_group": "2-3",
+      "orders": 22159,
+      "aov": 114.05
+    },
+    {
+      "installment_group": "4-6",
+      "orders": 15739,
+      "aov": 157.04
+    },
+    {
+      "installment_group": "7-12",
+      "orders": 11584,
+      "aov": 300.12
+    },
+    {
+      "installment_group": "13+",
+      "orders": 179,
+      "aov": 375.67
+    }
+  ],
+  "delay_review": [
+    {
+      "label": "按时/提前",
+      "orders": 88171,
+      "avg_review": 4.29,
+      "share_1star": 0.0656,
+      "share_5star": 0.6244
+    },
+    {
+      "label": "超时",
+      "orders": 7661,
+      "avg_review": 2.57,
+      "share_1star": 0.4613,
+      "share_5star": 0.2223
+    }
+  ],
+  "score_dist": [
+    {
+      "score": 1,
+      "orders": 9313
+    },
+    {
+      "score": 2,
+      "orders": 2954
+    },
+    {
+      "score": 3,
+      "orders": 7916
+    },
+    {
+      "score": 4,
+      "orders": 18945
+    },
+    {
+      "score": 5,
+      "orders": 56704
+    }
+  ],
+  "state_delivery": [
+    {
+      "customer_state": "SP",
+      "orders": 40501,
+      "late_rate": 0.0589,
+      "avg_delivery_days": 8.8,
+      "avg_review": 4.25
+    },
+    {
+      "customer_state": "RJ",
+      "orders": 12350,
+      "late_rate": 0.1347,
+      "avg_delivery_days": 15.3,
+      "avg_review": 3.97
+    },
+    {
+      "customer_state": "MG",
+      "orders": 11354,
+      "late_rate": 0.0561,
+      "avg_delivery_days": 12.0,
+      "avg_review": 4.19
+    },
+    {
+      "customer_state": "RS",
+      "orders": 5345,
+      "late_rate": 0.0715,
+      "avg_delivery_days": 15.3,
+      "avg_review": 4.19
+    },
+    {
+      "customer_state": "PR",
+      "orders": 4923,
+      "late_rate": 0.05,
+      "avg_delivery_days": 12.0,
+      "avg_review": 4.24
+    },
+    {
+      "customer_state": "SC",
+      "orders": 3546,
+      "late_rate": 0.0976,
+      "avg_delivery_days": 15.0,
+      "avg_review": 4.13
+    },
+    {
+      "customer_state": "BA",
+      "orders": 3256,
+      "late_rate": 0.1404,
+      "avg_delivery_days": 19.3,
+      "avg_review": 3.93
+    },
+    {
+      "customer_state": "DF",
+      "orders": 2080,
+      "late_rate": 0.0707,
+      "avg_delivery_days": 13.0,
+      "avg_review": 4.13
+    },
+    {
+      "customer_state": "ES",
+      "orders": 1995,
+      "late_rate": 0.1223,
+      "avg_delivery_days": 15.8,
+      "avg_review": 4.08
+    },
+    {
+      "customer_state": "GO",
+      "orders": 1957,
+      "late_rate": 0.0818,
+      "avg_delivery_days": 15.6,
+      "avg_review": 4.1
+    },
+    {
+      "customer_state": "PE",
+      "orders": 1593,
+      "late_rate": 0.108,
+      "avg_delivery_days": 18.4,
+      "avg_review": 4.08
+    },
+    {
+      "customer_state": "CE",
+      "orders": 1279,
+      "late_rate": 0.1532,
+      "avg_delivery_days": 21.3,
+      "avg_review": 3.94
+    }
+  ],
+  "rfm_segments": [
+    {
+      "segment": "Promising",
+      "customers": 21715,
+      "gmv": 4512471.77,
+      "avg_orders": 1.0,
+      "avg_monetary": 207.8,
+      "customer_share": 0.2326,
+      "gmv_share": 0.3413
+    },
+    {
+      "segment": "Hibernating High-Value",
+      "customers": 21043,
+      "gmv": 4453006.44,
+      "avg_orders": 1.0,
+      "avg_monetary": 211.61,
+      "customer_share": 0.2254,
+      "gmv_share": 0.3368
+    },
+    {
+      "segment": "Need Attention",
+      "customers": 18264,
+      "gmv": 2358030.67,
+      "avg_orders": 1.01,
+      "avg_monetary": 129.11,
+      "customer_share": 0.1956,
+      "gmv_share": 0.1783
+    },
+    {
+      "segment": "Lost / One-time",
+      "customers": 15185,
+      "gmv": 607234.96,
+      "avg_orders": 1.0,
+      "avg_monetary": 39.99,
+      "customer_share": 0.1627,
+      "gmv_share": 0.0459
+    },
+    {
+      "segment": "New / Recent",
+      "customers": 14509,
+      "gmv": 570493.53,
+      "avg_orders": 1.0,
+      "avg_monetary": 39.32,
+      "customer_share": 0.1554,
+      "gmv_share": 0.0431
+    },
+    {
+      "segment": "Champions",
+      "customers": 937,
+      "gmv": 306481.81,
+      "avg_orders": 2.19,
+      "avg_monetary": 327.09,
+      "customer_share": 0.01,
+      "gmv_share": 0.0232
+    },
+    {
+      "segment": "At Risk",
+      "customers": 988,
+      "gmv": 243556.29,
+      "avg_orders": 2.08,
+      "avg_monetary": 246.51,
+      "customer_share": 0.0106,
+      "gmv_share": 0.0184
+    },
+    {
+      "segment": "Loyal",
+      "customers": 717,
+      "gmv": 170222.64,
+      "avg_orders": 2.08,
+      "avg_monetary": 237.41,
+      "customer_share": 0.0077,
+      "gmv_share": 0.0129
+    }
+  ],
+  "freq_dist": [
+    {
+      "orders": "1",
+      "customers": 90557
+    },
+    {
+      "orders": "2",
+      "customers": 2573
+    },
+    {
+      "orders": "3",
+      "customers": 181
+    },
+    {
+      "orders": "4",
+      "customers": 28
+    },
+    {
+      "orders": "5+",
+      "customers": 19
+    }
+  ],
+  "seller_summary": {
+    "total_sellers": 2970,
+    "top_sellers_for_80pct_gmv": 533,
+    "top_10_gmv_share": 0.1327,
+    "top10": [
+      {
+        "rank": 1,
+        "seller_id": "4869f7a5dfa277a7dca6462dcf3b52b2",
+        "orders": 1124,
+        "gmv": 226987.93,
+        "cum_share": 0.0172
+      },
+      {
+        "rank": 2,
+        "seller_id": "53243585a1d6dc2643021fd1853d8905",
+        "orders": 348,
+        "gmv": 217940.44,
+        "cum_share": 0.0337
+      },
+      {
+        "rank": 3,
+        "seller_id": "4a3ca9315b744ce9f8e9374361493884",
+        "orders": 1772,
+        "gmv": 196882.12,
+        "cum_share": 0.0485
+      },
+      {
+        "rank": 4,
+        "seller_id": "fa1c13f2614d7b5c4749cbc52fecda94",
+        "orders": 578,
+        "gmv": 190917.14,
+        "cum_share": 0.063
+      },
+      {
+        "rank": 5,
+        "seller_id": "7c67e1448b00f6e969d365cea6b010ab",
+        "orders": 973,
+        "gmv": 186570.05,
+        "cum_share": 0.0771
+      },
+      {
+        "rank": 6,
+        "seller_id": "7e93a43ef30c4f03f38b393420bc753a",
+        "orders": 319,
+        "gmv": 165981.49,
+        "cum_share": 0.0896
+      },
+      {
+        "rank": 7,
+        "seller_id": "da8622b14eb17ae2831f4ac5b9dab84a",
+        "orders": 1311,
+        "gmv": 159816.87,
+        "cum_share": 0.1017
+      },
+      {
+        "rank": 8,
+        "seller_id": "7a67c85e85bb2ce8582c35f2203ad736",
+        "orders": 1145,
+        "gmv": 139658.69,
+        "cum_share": 0.1123
+      },
+      {
+        "rank": 9,
+        "seller_id": "1025f0e2d44d7041d6cf58b6550e0bfa",
+        "orders": 910,
+        "gmv": 138208.56,
+        "cum_share": 0.1228
+      },
+      {
+        "rank": 10,
+        "seller_id": "955fee9216a65b617aa5c0531780ce60",
+        "orders": 1261,
+        "gmv": 131836.71,
+        "cum_share": 0.1327
+      }
+    ]
+  },
+  "order_status": [
+    {
+      "status": "delivered",
+      "count": 96478
+    },
+    {
+      "status": "shipped",
+      "count": 1107
+    },
+    {
+      "status": "canceled",
+      "count": 625
+    },
+    {
+      "status": "unavailable",
+      "count": 609
+    },
+    {
+      "status": "invoiced",
+      "count": 314
+    },
+    {
+      "status": "processing",
+      "count": 301
+    },
+    {
+      "status": "created",
+      "count": 5
+    },
+    {
+      "status": "approved",
+      "count": 2
+    }
+  ]
+}
